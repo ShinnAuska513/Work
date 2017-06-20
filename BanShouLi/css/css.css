@@ -1,0 +1,136 @@
+.clearfix{}
+.clearfix::after{
+	content: "";
+	font-size: 0;
+	line-height: 0;
+	height: 0;
+	display: block;
+	clear: both;
+}
+/*头部开始*/
+.top{width: 1000px;height: 98px;margin: 0 auto;margin-top: 15px;position: relative;}
+.top .logo{width: 132px; float: left; position: relative;}
+.top .topnav{float: left; height: 29px; position: absolute;right: 10px;}
+.top .topnav a{ font-size: 14px; padding: 0 14px; line-height: 29px; color: #626262; border-left: 2px solid #3C3C3C; transition: color.1s ease-out 0s;}
+.top .topnav a.call{ background:url(../img/banshouli_1.png)-17px -11px no-repeat;border: 0; padding-left: 20px;}
+.top .topnav a.box{position:relative; b; padding-left: 48px;}
+.top .topnav a.box i{display: block;position: absolute;top: -4px; left: 15px; width: 25px;height: 24px;background: url(../img/banshouli_1.png)no-repeat -12px -290px;}
+.top .topnav a:hover{color: #FFA000;}
+.top .topnav form{float: right;}
+.top .topnav input.text{width: 154;height: 29px;border: 1px solid #3C3C3C;}
+.top .topnav input.submit{float: left; display: block; float: right;width: 28px; height: 29px; border: 1px solid #3C3C3C; background: url(../img/banshouli_1.png) -13px -42px no-repeat;border-radius: 0 10px 10px 0;}
+.top .topnav2{ height: 29px; position: absolute;bottom: 0px; left: 193px;}
+.top .topnav2 a{ font-size: 18px; font-weight: 600; padding: 0 20px; line-height: 29px; color: #626262; transition: color.2s ease-out 0s;}
+.top .topnav2 i{display: block; float: left; width: 25px;height: 24px;background: url(../img/banshouli_1.png)no-repeat -12px -70px;}
+.top .topnav2 a:hover{color: #176FBB;}
+.boundary{width: 100%;height: 5px;background-color: #176FBB; min-width: 1000px;}
+.sy{width: 1000px;height: 53px; margin: 0 auto; line-height: 53px;}
+.Advertisement{width: 100%;height: 350px;background: url(../img/banshouli_14.jpg)center no-repeat; background-size: cover;min-width: 1000px;
+margin-bottom: 28px;}
+.Advertisement-box{width: 1000px;height: 350px; margin: 0 auto;}
+.amin{width: 1000px;height: 564px;margin: 0 auto;margin-bottom: 27px;}
+.amin .title{width: 1000px;height: 40px;margin-bottom: 2px; text-align: center; color: #CC0000;font-size: 30px;line-height: 40px; font-weight: 600; background: url(../img/banshouli_1.png) 428px -106px no-repeat;}
+.amin .title p{text-indent: 50px; }
+.amin .content .left-content{margin-right: 28px; float: left;}
+.amin .content .left-content .tp1{width: 314px;height: 220px; margin-top: 26px;position: relative;}
+.amin .content .center-content{ float: left;}
+.amin .content .center-content .tp1{width: 314px;height: 220px; margin-top: 26px; position: relative;}
+.amin .content .right-content{ float: right;}
+.amin .content .right-content .tp1{width: 314px;height: 220px; margin-top: 26px; position: relative;}
+.amin .content .tp1 .bt{
+										width: 314px;
+										height: 40px;
+										background-color: rgba(0,0,0,0.5);
+										position: absolute;
+										bottom: 0;
+										text-align: center;
+										font-size: 16px;
+										font-weight: 600;
+										color: white;
+										line-height: 40px;
+										transition: bottom .3s linear .5s;
+										}
+.amin .content .tp1{
+	overflow: hidden;
+}
+
+.amin .content .tp1 .synopsis{
+	margin: 0 auto;
+	width: 314px;
+	padding: 0px 0px;
+	height: 220px;
+	background-color: rgba(0,0,0,0);
+	z-index: 1;
+	position: absolute;
+	bottom: 0;
+	color: white;
+	transform: scale(1.2);
+	z-index: -1;	
+		transition: all.3s  ease-in-out .3s;
+	text-align: center;
+	
+}
+.amin .content .tp1 .synopsis .an{
+	padding: 0 87px;
+	padding-top: 16px;
+	padding-bottom: 50px;
+
+}
+.amin .content .tp1 .synopsis .an .submit1{
+	width: 69px;
+	height: 21px;
+	float: left;
+	position: relative;
+}
+.amin .content .tp1 .synopsis .an .submit1 a{
+	background: url(../img/banshouli_1.png)-16px -244px no-repeat;
+	display: block;
+	width: 20px;
+	height: 20px;
+	float: left;
+}
+.amin .content .tp1 .synopsis .an .submit2{
+	width: 69px;
+	height: 21px;
+	float: left;
+}
+.amin .content .tp1 .synopsis .an .submit2 a{
+	background: url(../img/banshouli_1.png)-16px -268px no-repeat;
+}
+.amin .content .tp1 .synopsis span{
+	margin: 0 auto;
+	display: block;
+	width: 204px;
+	padding: 7px; 58px;
+	/*border: 1px solid red;*/
+}
+.amin .content .tp1:hover .bt{
+	position: absolute;
+	bottom: -50px;
+	transition: all .3s ease-out 0s;
+}
+.amin .content .tp1:hover .synopsis{
+	z-index: 1;
+	transform: scale(1);
+	background-color: rgba(0,0,0,0.5);
+	transition: all .3s ease-out;
+
+}
+.amin .content .ys{width: 1000px;height: 23px; float: left; text-align: center;}
+.ftooer{width: 100%;height: 178px;border-bottom: 1px solid white; background-color: #023C4D; min-width: 1000px;}
+.ftooer-box1{width: 1000px;height: 178px; padding-left: 100px; margin: 0 auto;}
+.ftooer-box1 ul {float: left; margin-right: 75px;margin-top: 22px;}
+.ftooer-box1 ul li{padding: 4px 0; color: white;}
+.ftooer-box1 ul li a{color: white;}
+.ftooer-box1 .wx,.qq{float: left;width: 37px;height: 40px;margin: 0 3px;}
+.ftooer-box1 .wx{background: url(../img/banshouli_1.png)-8px -205px no-repeat;}
+.ftooer-box1 .qq{background: url(../img/banshouli_1.png)-8px -158px no-repeat;}
+.ftooer-box1 .li2{padding: 4px 0; margin-right: 0; margin-top: 12px;}
+.ftooer-box1 .li2 li{margin-right: 0;}
+.ftooer-box1 .li2 li .an{width: 100px;}
+.ftooer-box1 .li2 li .inner{ background: url(../img/banshouli_2.png) center repeat-x;}
+.ftooer-box1 .li2 li .inner-left{ background: url(../img/banshouli_2.png) left top no-repeat;}
+.ftooer-box1 .li2 li .inner-right{height: 24px; background: url(../img/banshouli_2.png) right bottom no-repeat; text-align: center;}
+.ftooer-box1 .li2 li .inner-right a{color: #023c4d;}
+.ftooer2{width: 100%;height: 57px;border-bottom: 1px solid white; background-color: #023C4D;}
+.ftooer2 .ftooer-box2{text-align: center; color: #d0d0d0; line-height: 57px;}
