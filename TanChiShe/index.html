@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>贪吃蛇</title>
+<style type="text/css">
+*{margin:0;padding:0;}
+body{background: url(bg.png)0 0;}
+div{width: 15px;height: 15px;background:#ccc;position:absolute;}
+#snake{background:skyblue;left:0;top:0;}
+#food{width: 15px;height: 15px;background:red;position:absolute;left:45px;top:45px;}
+</style>
+</head>
+<body>
+    <div id="snake"></div>
+    <!-- <div></div> -->
+    <p id="food"></p>
+</body>
+<script type="text/javascript">
+var snake = document.getElementById('snake');
+var food = document.getElementById('food');
+var divs = document.getElementsByTagName('div');
+//页面的大小
+var ww = document.documentElement.clientWidth;
+var hh = document.documentElement.clientHeight;
+//每个小格
+var box = 15;
+//l-x轴变化 t-y轴变化(蛇)
+var l = 0;
+var t = 0;
+//游戏状态(false-未开始 true-已开始)
+var moveBol = false;
+//蛇运动
+document.onkeydown = function(ev){
+    var event = ev||window.event;
+    //当前按下键的键码值
+    switch(event.keyCode){
+        //左
+        //判断状态为开始，并且l或者t每次为0才能赋值
+        case 37:if(moveBol == false&&l == 0){
+             l=-box;t=0;
+        }
+        break;
+        //上
+        case 38:if(moveBol == false&&t == 0){
+             t=-box;l=0;
+         }
+        break;
+        //右
+        case 39:if(moveBol == false&&l == 0){
+             l=box;t=0;
+         }
+        break;
+        //下
+        case 40:if(moveBol == false&&t == 0){
+            t=box;l=0;
+        }
+        break;
+    }
+    moveBol = true;
+}
+//游戏开始
+    var time = setInterval(function(){
+            eatFood();
+            //无需判断moveBol，直接运行计时器
+             //蛇身体定位赋值
+            for (var i = divs.length-1; i>0 ;i--){
+                divs[i].style.left = divs[i-1].offsetLeft + "px";
+                divs[i].style.top = divs[i-1].offsetTop + "px";
+            };
+            //蛇头定位赋值
+            snake.style.left = snake.offsetLeft + l +"px";
+            snake.style.top = snake.offsetTop + t +"px";
+            
+            //临界值判断
+            if(snake.offsetLeft<0 || snake.offsetLeft>ww-box || snake.offsetTop<0 ||snake.offsetTop>hh-box){
+                clearInterval(time);
+                alert("Game Over!");
+            }
+            boom();
+            //计时器每次运行后moveBol为false,能够按键
+            moveBol = false;
+    },200);
+
+document.onclick = function(){
+    Foodrnd();
+}
+//食物的定位
+function Foodrnd(){
+    //食物的位置
+    var rndL = Math.floor(Math.random()*(ww/box));
+    var rndT = Math.floor(Math.random()*(hh/box));
+    
+    /*if(snake.offsetLeft == food.offsetLeft && snake.offsetTop == food.offsetTop){
+    }*/
+    //判断不能和蛇的定位相同
+    for (var i = 0; i < divs.length; i++) {
+        if(divs[i].offsetLeft == food.offsetLeft && divs[i].offsetTop == food.offsetTop){
+            Foodrnd();
+        }else{
+            //赋值
+            console.log(rndL*box);
+            food.style.left = rndL*box + "px";
+            food.style.top = rndT*box + "px";
+        }
+    };
+    
+}
+//蛇身体创建插入
+function cBody(){
+    //创建
+    var div = document.createElement("div");
+    //插入
+    document.body.appendChild(div);
+}
+//蛇的身体碰撞
+function boom(){
+    //至少5个div才会碰撞
+    for (var i = 4; i < divs.length; i++) {
+        if(snake.offsetLeft == divs[i].offsetLeft && snake.offsetTop == divs[i].offsetTop){
+            alert("Game Over!");
+            clearInterval(time);
+        }
+    };
+}
+//蛇头碰撞食物
+function eatFood(){
+    //获取蛇头四条边到窗口的距离
+    var l1 = snake.offsetLeft+l;
+    // var r1 = l1+snake.offsetWidth;
+    var t1 = snake.offsetTop+t;
+    // var b1 = t1+snake.offsetHeight;
+
+    //获取食物四条边到窗口的距离
+    var l2 = food.offsetLeft;
+    // var r2 = l2+food.offsetWidth;
+    var t2 = food.offsetTop;
+    // var b2 = t2+food.offsetHeight;
+
+    //判断碰撞
+    if(l1==l2&&t1==t2){
+        Foodrnd();
+        cBody();
+    }
+}
+
+
+
+
+
+</script>
+</html>
