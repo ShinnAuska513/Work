@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta>
+	<style type="text/css">
+	*{ 
+		margin:0; padding:0; font-family:"微软雅黑";
+	}
+	#outer{ 
+		background:url(game_bg.jpg) 0 0 no-repeat; 
+		height:480px; 
+		width:320px; 
+		position:relative;
+	}
+	
+	#scoring{ 
+		position:absolute; 
+		font-weight:bold; 
+		font-size:16px; 
+		color:white; 
+		left:65px; 
+		top:13px;
+	}
+	#countDown{ 
+		position:absolute;
+		background:url(progress.png) 0 0 no-repeat; 
+		width:180px; height:16px; 
+		left: 63px;top: 66px;
+	}
+	#wolfs img{ 
+		position:absolute;
+	}
+	
+	#menu{ 
+		position:absolute; 
+		width:320px; 
+		text-align:center; 
+		left:0; top:200px;
+	}
+	
+	#start,#handle,#gameOver{ 
+		line-height:50px; 
+		font-size:30px; 
+		font-weight:bold; 
+		color:#F60; 
+		text-shadow:0 0 5px #FFFF00; 
+		display:block; 
+		text-decoration:none;
+	}
+	
+	#gameOver{ 
+		position:absolute; 
+		width:320px; 
+		text-align:center; 
+		top:200px; left:0; 
+		display:none;
+	}
+	</style>
+<script type="text/javascript">
+function rand(min,max){
+	// return parseInt(Math.random()*(max-min))+min;
+	return Math.ceil((Math.random()*(max-min))+min);
+}
+
+window.onload=function (){
+
+var scoring=document.getElementById("scoring");//分数
+var countDown=document.getElementById("countDown");//倒计时
+var wolfs=document.getElementById("wolfs");
+var menu=document.getElementById("menu");//菜单
+var start=document.getElementById("start");
+var gameOver=document.getElementById("gameOver");
+
+//灰太狼随机出现的位置
+var arrPos=[{l:"98px",t:"115px"},{l:"17px",t:"160px"},{l:"15px",t:"220px"},{l:"30px",t:"293px"},{l:"122px",t:"273px"},{l:"207px",t:"295px"},{l:"200px",t:"211px"},{l:"187px",t:"141px"},{l:"100px",t:"185px"}];
+// console.log(arrPos[2].l);
+
+// 进度条的长度
+var countDownWidth = countDown.offsetWidth;
+// 得分
+var scoringNum = 0;
+
+start.onclick=function (){
+
+	menu.style.display="none";
+
+	//计分
+	function fnScoring(sug){//标示符
+
+		if (sug=="h"){
+			scoringNum+=10;
+		}
+		else{
+			scoringNum-=10;
+		}
+		scoring.innerHTML=scoringNum;
+	}
+
+	//倒计时
+	var countDownTimer=setInterval(function (){
+		countDownWidth--;
+		if (countDownWidth<=0){
+			clearInterval(countDownTimer);
+			clearInterval(showTimer);
+			setTimeout(function (){
+
+				gameOver.style.display="block";
+				gameOver.innerHTML="game over!<br/>您的得分是："+scoringNum;
+				
+			},2000);
+		}
+		countDown.style.width=countDownWidth+"px";
+
+	},100);
+
+	//开始出现灰太狼
+	var showTimer=setInterval(function (){
+
+		var oImg=document.createElement("img");
+
+		//百分之80的几率出现灰太狼，百分之20的几率出现小灰灰
+		//h0.png
+		oImg._src=rand(1,100)>80 ? "x" : "h";
+		// console.log(rand(1,100));
+		oImg.index=0;
+		oImg.src=oImg._src+"0.png";
+		wolfs.appendChild(oImg);
+
+		var bolPos=true;
+		
+		while(bolPos){
+
+			oImg.iRa=rand(0,arrPos.length);	
+			var aImg=wolfs.children;
+			var l=parseInt(arrPos[oImg.iRa].l);
+			var t=parseInt(arrPos[oImg.iRa].t);
+			
+			// 找到没有重复的位置
+			for (var i = 0; i < aImg.length; i++) {
+				//95px
+				if (aImg[i].offsetLeft==l&&aImg[i].offsetTop==t){
+					break;
+				}
+			};
+			if (i==aImg.length){
+				bolPos=false;
+			}
+		}
+		
+		oImg.style.left=l+"px";
+		oImg.style.top=t+"px";
+
+		oImg.timer=setInterval(function (){
+			//向上
+			oImg.index++;
+			if (oImg.index>4){
+				clearInterval(oImg.timer);
+			}
+			//src=标示符+下标+".png"
+			oImg.src=oImg._src+oImg.index+".png";
+		},50);
+
+		oImg.removeTimer=setTimeout(function (){
+
+			oImg.downTimer=setInterval(function (){
+				//向下
+				oImg.index--;
+				if (oImg.index<=0){
+					clearInterval(oImg.downTimer);
+					wolfs.removeChild(oImg);
+				}
+				oImg.src=oImg._src+oImg.index+".png";
+			}, 50);
+		},800);
+
+		oImg.onclick=function (){
+			fnScoring(oImg._src);
+			oImg.index=5;
+			clearTimeout(oImg.removeTimer);
+			clearInterval(oImg.downTimer);
+			oImg.removeTimer=setInterval(function (){
+				oImg.index++;
+				if (oImg.index>8){
+					wolfs.removeChild(oImg);
+					//清除掉图片
+					clearInterval(oImg.removeTimer);
+				}
+				oImg.src=oImg._src+oImg.index+".png";
+			},100);
+
+		}
+
+	},500);
+}
+}
+
+</script>
+</head>
+<body>
+<div id="outer">
+	<div id="scoring">0</div><!--这是分数-->
+    <div id="countDown"></div><!--倒计时-->
+    
+    <div id="wolfs">
+    	<!-- <img src="h0.png"/> -->
+    </div><!--灰太狼们-->
+    
+    <div id="menu">
+        <a href="#" id="start">开始</a>
+        <a href="#" id="handle">游戏操作说明</a>
+    </div>
+    
+    <div id="gameOver">game over!</div>
+</div>
+</body>
+</html>
