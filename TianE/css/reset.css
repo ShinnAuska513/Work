@@ -1,0 +1,27 @@
+@charset "utf-8";
+/*=========================Reset_start==========================*/
+body,h1,h2,h3,h4,h5,h6,div,p,dl,dt,dd,ol,ul,li,form,table,th,td,a,img,span,strong,var,em,input,textarea,select,option{margin: 0; padding: 0; text-align: center;}
+html,body{font-family:"微软雅黑",Arail,Tabhoma; font-size: 14px; text-align: left;}
+ul,ol{list-style: none;}
+/*img在IE6低版本浏览器中，自带边框*/
+img{border: 0;}
+/*消除表单控件自带的边框*/
+input,select,textarea{outline:0;}
+/*消除多行输入文本框边框样式*/
+textarea{resize:none; overflow: auto;}
+table{border-collapse: collapse; border-spacing: 0;}
+th,strong,var,em{font-weight: normal; font-style: normal;}
+a{text-decoration: none; color: black;}
+
+/*==========================Reset_End===========================*/
+.clearfix{
+	
+}
+.clearfix::after{
+	content: "";
+	font-size: 0;
+	line-height: 0;
+	height: 0;
+	display: block;
+	clear: both;
+}
